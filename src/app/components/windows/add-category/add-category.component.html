@@ -1,0 +1,17 @@
+<div class="fade" *ngIf="visible">
+  <div class="window">
+    <div class="window-header">Add category</div>
+    <div class="window-main">
+      <dl>
+        <dt>Category name:</dt>
+        <dd>
+          <input type="text" [(ngModel)]="name">
+        </dd>
+      </dl>
+    </div>
+    <div class="window-footer">
+      <button class="wnd-btn" (click)="clickOKAddCategoryWin()">OK</button>
+      <button class="wnd-btn" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="fade" *ngIf="visible">
+  <div class="window">
+    <div class="window-header">Add note</div>
+    <div class="window-main">
+      <dl>
+        <dt>Note name:</dt>
+        <dd>
+          <input type="text" [(ngModel)]="name">
+        </dd>
+        <dt>Note description:</dt>
+        <dd>
+          <input type="text" [(ngModel)]="desc">
+        </dd>
+      </dl>
+    </div>
+    <div class="window-footer">
+      <button class="wnd-btn" (click)="clickOKAddNoteWin()">OK</button>
+      <button class="wnd-btn" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</div>

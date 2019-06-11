@@ -1,0 +1,32 @@
+ul{
+  margin: 0;
+  list-style: none;
+  padding: 0;
+}
+.category-container{
+  display: inline-flex;
+  flex-flow: row nowrap;
+  width: 100%;
+}
+li{
+  height: 50px;
+  line-height: 50px;
+  text-transform: uppercase;
+  padding-left: 10px;
+  flex-grow: 1;
+}
+li:hover{
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.active{
+  background-color: #fff;
+  border: 1px #c1c1c1 solid;
+  border-left: white;
+  border-radius: 0 5px 5px 0;
+}
+hr{
+  margin: 0 10px;
+}
+

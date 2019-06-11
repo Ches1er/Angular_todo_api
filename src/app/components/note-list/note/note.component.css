@@ -1,0 +1,18 @@
+.note{
+  display: inline-flex;
+  flex-flow: column nowrap;
+  border: #9f99ff 1px solid;
+  width: 100%;
+  margin-bottom: 5px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.note-name{
+  background-color: #eee;
+  padding: 10px;
+  font-size: larger;
+}
+.note-desc{
+  background-color: #d4d4d4;
+  padding: 10px;
+}

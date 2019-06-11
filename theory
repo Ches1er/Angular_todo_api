@@ -1,0 +1,151 @@
+1. Создаем директории components и services.
+2. Создадим 2 компонента: categories и notelist.
+3. В главном компоненте создаем разметку: container и leftbar и righbar
+4. Подключаем наши компоненты, в левой панеле categories в правой notelist
+5. Создаем директорию dto. Создадим в ней класс Category.
+6. В этом классе сделаем конструктор, который будет принимать и создавать приватные поля:
+id: number и name: string.
+7. Добавляем геттеры и сетеры.
+8. Т.к. мы будем восстанавливать категории из json, то создадим метод, который будет это делать
+public static fromJson(jsonObj: any):Category{
+    return new Category(jsonObj.id,jsonObj.name)
+}
+9. Сделаем также метод:
+public toJson(){
+  return {
+  id: this.id
+  name: this.name
+  }
+}
+10. Наша api по категориям: hppt://pdfstep.zzz.com.ua?method=user&action=getAll
+В результате эта api выдает не только массив с категориями, но и прочие результаты запроса.
+Поэтому нам надо будет создать dto под этот результат categoryResponse.
+11. В этом классе создадим конструктор в который будем принимать:
+constructor(private data:Array<Category>,private status:string,errors:string){}
+12. Создадим геттеры и сеттеры для 3-х полей.
+13. Создадим также метод:
+public static fromJson(jsonObj:any):CategoryResponse{
+  return new CategoryResponse(
+    jsonObj.data.map(e=>Category.fromJson(e)),
+    jsonObj.status,
+    jsonObj.errors
+  )
+}
+
+14. Пишем сервис, который будет работать с нашими dto. Category
+(он потом будет называться CategoryService)
+15. Создадим в папке сервисов также файл api-config.ts в нем напишем:
+export class ApiConfig{
+  private static BASE_API_URL = 'http://pdfstep.zzz.com.ua';
+
+  get getCategoriesUrl():string{
+    return ApiCongig.BASE_API_URL+'?action=user&method=getAll';
+  }
+
+  get addCategoryUrl():string{
+  return ApiCongig.BASE_API_URL+'?action=user&method=add';
+  }
+
+   get addCategoryUrl():string{
+   return ApiCongig.BASE_API_URL+'?action=user&method=delete';
+   }
+
+}
+
+16. Пишем CategoryService. Сначала подключаем в модулях HttpClientModule
+
+private apiConfig:ApiConfig = new ApiConfig;
+
+constructor(@Inject(HttpClient) private http:HttpClient){}
+
+get categories():Observable<Array<Category>>{
+  return this.http.get(this.apiConfig.getCategoriesUrl)
+  .pipe(map(resp=>CategoryResponse.fromJson(resp)))
+  .pipe(map(categoryResponse=>categoryResponse.data))
+}
+
+17. Идем в компонент categorie. В этом компоненте в конструкторе инжектим наш сервис
+
+private categories:Array<Category>=[];
+private activeCategory: Category = null;
+
+constructor(@Inject(CategoryService) private categoryService:CategoryService)
+в методе ngOnInit(){
+  this.categoryService.categories.subscribe(categories=>{this.categories=categories;})
+}
+Для activeCategory создаем геттер и сеттер, они нам пригодятся в будущем
+
+18. Идем в categorie.html и выводим в нем наши категории. По клику на категорию будем
+записывать активную категорию: (click)="activeCategory=category"
+[class.active]= "category==activeCategory"
+
+   Реализуем просмотр сообщений в правом блоке.
+
+19. Создадим новый сервис Message. В нем создадим следующие св-ва и методы:
+private pChangeCategoryMessage: Subject<Category> = new Subject();
+
+get changeCategoryMessage(){
+  return this.pChangeCategoryMessage
+}
+
+public changeCategory(category:Category){
+  this.pChangeCategoryMessage.next(category)
+}
+20. Идем в category-components. Инъектируем наш сервис в конструкторе.
+При изменении категории, будет происходить следующее, в сеттере activeCategory вместе
+с изменением активной категории, будет происходить запись в сервис Message об изменении
+  set activeCategory(value: Category) {
+    this.messageService.changeCategory(value);
+    this.pActiveCategory = value;
+  }
+
+21. Идем в note-list компонент. В него нам необходимо пробросить измененную категорию
+создаем публичное св-во:
+  category=Null;
+  ngOnInit() {
+    this.messageService.changeCategoryMessage.subscribe(category => {
+      this.category = category;
+    });
+После чего в note-list хтмл мы можем выводить данную категорию.
+
+22. Создадим сервис для получения заметок.
+В него нам также потребуется инъекцировать HttpClient.
+В нем же создаем метод notes(category: Category), который будет принимать какую-то
+категорию.
+23. В dto создаем новый объект Note и NoteResponse, делаем их наподобие
+Category и CategoryResponse.
+24. Идем в сервис и в нем меняем метод notes.
+Это будет пост запрос, поэтому создаем внутри константу парамс
+public notes(category: Category): Observable<Array<Note>> {
+    const params: FormData = new FormData();
+    params.set('id', category.id.toString());
+    return this.http.post(this.config.getNotesUrl, params)
+      .pipe(tap(o => console.log(o)))
+      .pipe(map(resp => NoteResponse.fromJson(resp)))
+      .pipe(map(notesResponse => notesResponse.data));
+  }
+
+25. Создаем еще один компонент Note.
+В него мы будем напрямую передавать Note через инпут. В note-component.html отображаем
+наш инпут.
+26. Создадим в категориях кнопку Add. Сделаем папку Windows в папке Components.
+В ней будут храниться наши всплывающие окна.
+27. Реализуем первый компонент всыплывающших окон: addCategory
+28. Заготовим стили для всплывающих окон в глобальном файле css (не работает, сделал отдельно
+в компоненте цсс).
+29. В addCategory.html созадим блок fade а в нем создадим блок .window
+30. Окна в главном компоненте будут существовать всегда. Просто мы будем их включать
+Добавим нас компонент окна в app-component.html
+31. В addCategory.html в элемент window добавляем хидер, мейн, поля ввода, футер и кнопки.
+В поле инпут добавим [(ngModel)] = "name" и в addCategory-component.ts создаим такое же
+свойство + добавим еще свойство visible, по умолчанию false.
+32. В блок .fade добавим *ngIf="visible", т.е изначально окно у нас не будет показываться
+33. Идем в месседжСервис и добавляем там св-во addCategoryMessage и get addCategory().
+34. В addCategory-component.ts в конструкторе подключаем massageService, и в  ngOnInit()
+подписываемся на изменение addCategoryMessage.
+35. Вешаем на кнопку Add метод addCategory и в нем указываем this.messageService.addCategory();
+36. Обработаем кнопки ОК и Cancel. На последнюю по клику повесим метод cancel(). В нем пропишем
+изменение св-ва visible на false и name = '', чтоб нам при след вызове окна не выпадало
+старое значение названия категории;
+
+

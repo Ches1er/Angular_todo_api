@@ -1,0 +1,43 @@
+/*For windows*/
+
+.window{
+  width: 500px;
+  height: auto;
+  position: absolute;
+  left: calc(50% - 250px);
+  top: 100px;
+  background-color: #fff;
+}
+.window .window-header{
+  padding: 0 20px;
+  height: 50px;
+  line-height: 50px;
+  background-color: #eee;
+}
+.window .window-main{
+  padding: 20px;
+}
+.window .window-footer{
+  padding: 0 20px;
+  background-color: #eee;
+}
+.wnd-btn {
+  border: none;
+  margin-right: 10px;
+  height: 50px;
+  line-height: 50px;
+  background-color: #a5d7ff;
+  color: white;
+  cursor: pointer;
+  padding: 0 10px;
+}
+.fade{
+  position: fixed;
+  height: 100%;
+  z-index: 2222;
+  background-color: rgba(0,0,0,0.5);
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}

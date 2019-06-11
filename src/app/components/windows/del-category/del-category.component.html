@@ -1,0 +1,13 @@
+<div class="fade" *ngIf="visible">
+  <div class="window">
+    <div class="window-header">Delete category</div>
+    <div class="window-main">
+      Do you really want to delete category: {{category.pName}}
+    </div>
+    <div class="window-footer">
+      <button class="wnd-btn" (click)="clickOKDelCategoryWin()">OK</button>
+      <button class="wnd-btn" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</div>
+

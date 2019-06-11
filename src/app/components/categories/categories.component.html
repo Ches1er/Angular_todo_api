@@ -1,0 +1,14 @@
+<div class="block-header">Category list</div>
+<hr>
+<ul>
+  <div class="category-container" *ngFor="let category of categories">
+    <li
+      (click)="activeCategory=category"
+      [class.active]="activeCategory==category">
+      {{category.name}}
+    </li>
+    <button class="btn small" (click)="delCategoryBtnClick(category)">-</button>
+  </div>
+
+</ul>
+<button class="btn big" (click)="addCategory()">+</button>

@@ -1,0 +1,12 @@
+<div class="fade" *ngIf="visible">
+  <div class="window">
+    <div class="window-header">Delete note</div>
+    <div class="window-main">
+      Do you really want to delete note: {{note.pName}}
+    </div>
+    <div class="window-footer">
+      <button class="wnd-btn" (click)="clickOKDelNoteWin()">OK</button>
+      <button class="wnd-btn" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</div>
