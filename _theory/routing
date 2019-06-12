@@ -1,0 +1,18 @@
+1. В файле index.html в директиве <base href="/"> указываем с чего будет начинатться юрл
+нашего сайта.
+2. Создадим компоненты, например Home, About, PageNotFound. В них будут генериться наши страницы.
+3. Идем в app-module.ts. Импортируем след модуль:import {Routes, RouterModule} from '@angular/router';
+Здесь класс Routes предоставляет нам коллекцию маршрутов, а RouterModule - сам модуль для
+работы с маршрутизацией.
+4. Определяем сам набор маргшрутов. Сделаем константу appRoutes, в которой будет храниться
+массив маршрутов:
+const appRoutes: Routes = [
+  {path: '', component: HomeComponent},
+  {path: 'about', component: AboutComponent},
+  {path: '**', component: PageNotFoundComponent}
+];
+5. В массив imports добавляем RouterModule.forRoot(appRoutes).
+6. В app.component.html добавляем компонент <router-outlet>. На месте данного компонента
+будет рендериться компонент, который отвечает за роут, обозначенный в урл.
+7. Для создания навигации, сделаем список, в котором будут ашки, у которых вместо хреф
+будет свой аттрибут routerLink с url роута.
