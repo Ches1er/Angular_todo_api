@@ -2,7 +2,9 @@
   <div class="window">
     <div class="window-header">Delete note</div>
     <div class="window-main">
-      Do you really want to delete note: {{note.pName}}
+      <dl>
+        <dt>Do you really want to delete note: <span>{{note.pName}}</span> ?</dt>
+      </dl>
     </div>
     <div class="window-footer">
       <button class="wnd-btn" (click)="clickOKDelNoteWin()">OK</button>

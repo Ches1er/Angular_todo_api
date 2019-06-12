@@ -2,17 +2,30 @@
   display: inline-flex;
   flex-flow: column nowrap;
   border: #9f99ff 1px solid;
+  border-radius: 5px;
   width: 100%;
   margin-bottom: 5px;
-  padding: 5px;
+  padding: 10px;
   box-sizing: border-box;
 }
+
 .note-name{
   background-color: #eee;
-  padding: 10px;
+  padding: 5px;
   font-size: larger;
+  font-weight: bold;
+  border-radius: 5px;
+  text-align: center;
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 .note-desc{
-  background-color: #d4d4d4;
-  padding: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  background-color: #fff;
+  margin: 10px 0;
 }
+.note .btn {
+  margin: 0;
+}
+

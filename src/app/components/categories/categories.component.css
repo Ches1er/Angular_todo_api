@@ -3,10 +3,20 @@ ul{
   list-style: none;
   padding: 0;
 }
+.category-list{
+  height: auto;
+  overflow-y: auto;
+}
 .category-container{
   display: inline-flex;
   flex-flow: row nowrap;
   width: 100%;
+  margin-top: 10px;
+  align-items: center;
+  overflow-y: auto;
+}
+.category-container .small{
+  margin-top: 0;
 }
 li{
   height: 50px;
@@ -14,10 +24,12 @@ li{
   text-transform: uppercase;
   padding-left: 10px;
   flex-grow: 1;
+  font-family: 'Muli', sans-serif;
 }
 li:hover{
   font-weight: bolder;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .active{
@@ -25,6 +37,9 @@ li:hover{
   border: 1px #c1c1c1 solid;
   border-left: white;
   border-radius: 0 5px 5px 0;
+  transition: 0.2s;
+  box-shadow: 2px 2px 2px 0px rgba(193,193,193,1);
+
 }
 hr{
   margin: 0 10px;

@@ -2,7 +2,9 @@
   <div class="window">
     <div class="window-header">Delete category</div>
     <div class="window-main">
-      Do you really want to delete category: {{category.pName}}
+      <dl>
+        <dt>Do you really want to delete category: <span>{{category.pName}}</span> ?</dt>
+      </dl>
     </div>
     <div class="window-footer">
       <button class="wnd-btn" (click)="clickOKDelCategoryWin()">OK</button>

@@ -1,12 +1,16 @@
 <div class="block-header">Notes list</div>
 <hr>
-<div *ngIf="category">Notes from category: {{category.name}}
-  <div *ngFor="let note of notes">
-    <app-note [note]="note"></app-note>
+
+<div *ngIf="category">
+  <div class="note-list-header">Notes from category: <span>{{category.name}}</span></div>
+  <div class="notes-list">
+    <div *ngFor="let note of notes">
+      <app-note [note]="note"></app-note>
+    </div>
   </div>
   <button class="btn big" (click)="addNote()">+</button>
 </div>
-<div *ngIf="!category">Please select category</div>
+<div class="note-list-header" *ngIf="!category">Please select category</div>
 
 
 
