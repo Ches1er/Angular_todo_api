@@ -5,9 +5,27 @@
       <dl>
         <dt>Category name:</dt>
         <dd>
-          <input type="text" [(ngModel)]="name">
+          <input id = "category_name"  name="category_name"
+                 type="text" [(ngModel)]="name"
+                 required minlength="4"
+                 maxlength="10"
+                 #category_name="ngModel">
+
+          <div *ngIf="category_name.invalid && (category_name.dirty || category_name.touched)"
+               class="alert alert-danger">
+
+            <div *ngIf="category_name.errors.required">
+              Name is required.
+            </div>
+            <div *ngIf="category_name.errors.minlength">
+              Name must be at least 4 characters long.
+            </div>
+
+          </div>
+
         </dd>
       </dl>
+
     </div>
     <div class="window-footer">
       <button class="wnd-btn" (click)="clickOKAddCategoryWin()">OK</button>

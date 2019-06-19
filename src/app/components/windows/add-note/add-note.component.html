@@ -5,13 +5,48 @@
       <dl>
         <dt>Note name:</dt>
         <dd>
-          <input type="text" [(ngModel)]="name">
+          <input id = "note_name" name= "note_name"
+                 type="text" [(ngModel)]="name"
+                 required minlength="4"
+                 maxlength="10"
+                 #note_name = "ngModel">
+
+          <div *ngIf="note_name.invalid && (note_name.dirty || note_name.touched)"
+               class="alert alert-danger">
+
+            <div *ngIf="note_name.errors.required">
+              Name is required.
+            </div>
+            <div *ngIf="note_name.errors.minlength">
+              Name must be at least 4 characters long.
+            </div>
+
+          </div>
+
         </dd>
         <dt>Note description:</dt>
         <dd>
-          <input type="text" [(ngModel)]="desc">
+          <input id="note_desc" name = "note_desc"
+                 type="text" [(ngModel)]="desc"
+                 required minlength="4"
+                 maxlength="10"
+                 #note_desc = "ngModel">
+
+          <div *ngIf="note_desc.invalid && (note_desc.dirty || note_desc.touched)"
+               class="alert alert-danger">
+
+            <div *ngIf="note_desc.errors.required">
+              Description is required.
+            </div>
+            <div *ngIf="note_desc.errors.minlength">
+              Description must be at least 4 characters long.
+            </div>
+
+          </div>
+
         </dd>
       </dl>
+
     </div>
     <div class="window-footer">
       <button class="wnd-btn" (click)="clickOKAddNoteWin()">OK</button>

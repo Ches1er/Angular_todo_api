@@ -25,6 +25,11 @@ export class AddCategoryComponent implements OnInit {
   }
 
   clickOKAddCategoryWin() {
+/*    if (this.name.length > 10) {
+      alert('Category name must consists less then 10 characters. Try again.');
+      this.cancel();
+    }*/
+
     this.categoryService.addCategory(this.name).subscribe(resp => {
       this.msgService.updatedCategory();
     });

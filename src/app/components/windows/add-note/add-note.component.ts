@@ -33,6 +33,14 @@ export class AddNoteComponent implements OnInit {
   }
 
   clickOKAddNoteWin() {
+/*    if (this.name.length < 2 || this.name.length > 10) {
+      alert('Note name must consist more than 1 and less than 10 characters');
+      this.cancel();
+    }
+    if (this.desc.length > 20) {
+      alert('Description must consist less than 20 characters');
+      this.cancel();
+    }*/
     this.noteService.addNote(this.category, this.name, this.desc)
       .subscribe(resp => this.msgService.updatedNotes());
     this.cancel();

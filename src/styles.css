@@ -119,3 +119,12 @@
   right: 0;
 }
 
+  /*Alerts*/
+
+.alert {
+  margin-top: 5px;
+  font-weight: bold;
+  font-family: 'Open Sans Condensed', sans-serif;
+  color: red;
+}
+
